@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GomwxGenerator</string>
+    <string name="what_season_is_it">What is the current season?</string>
+    <string name="summer">Summer</string>
+    <string name="winter">Winter</string>
+    <string name="spring">Spring</string>
+    <string name="fall">Fall</string>
+</resources>
