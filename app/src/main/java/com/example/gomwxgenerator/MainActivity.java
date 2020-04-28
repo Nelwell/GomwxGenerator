@@ -7,31 +7,33 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class MainActivity extends AppCompatActivity implements
-        SeasonFragment.EditSurveyButtonListener {
-//        ResultsFragment.ResetResultsListener,
+        SeasonFragment.EditSurveyButtonListener,
+        IssueTimeFragment.ResetResultsListener {
 //        ConfigureSurveyFragment.NewSurveyListener {
 
-    private static final String TAG_CONFIG_FRAG = "CONFIG FRAGMENT";
+    private static final String TAG_ISSUE_TIME_FRAG = "ISSUE TIME FRAGMENT";
 
     private SeasonFragment seasonFragment;
 
-    private String currentSeason;
+    private String seasonQuestion;
     private String summer;
     private String fall;
+    private String winter;
+    private String spring;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        currentSeason = getString(R.string.what_season_is_it);
+        seasonQuestion = getString(R.string.what_season_is_it);
         summer = getString(R.string.summer);
         fall = getString(R.string.fall);
         winter = getString(R.string.winter);
         spring = getString(R.string.spring);
 
         // Create Season fragment
-        seasonFragment = SeasonFragment.newInstance(currentSeason, summer, fall);
+        seasonFragment = SeasonFragment.newInstance(seasonQuestion, summer, fall, winter, spring);
 
         // Show the two created fragments
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -40,15 +42,18 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void saveEdits(String question, String answerOne, String answerTwo) {
+    public void saveEdits(String season, String summer, String fall,
+                          String winter, String spring) {
 
-        currentSeason = question;
-        summer = answerOne;
-        fall = answerTwo;
+        seasonQuestion = season;
+        this.summer = summer;
+        this.fall = fall;
+        this.winter = winter;
+        this.spring = spring;
 
         // Make brand new survey Fragment Activity by replacing existing activity
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        seasonFragment = SeasonFragment.newInstance(question, answerOne, answerTwo);
+        seasonFragment = SeasonFragment.newInstance(season, summer, fall, winter, spring);
         ft.replace(R.id.survey_question_fragment_container, seasonFragment);
 
         Log.d("Main Activity", "Save Edits");
@@ -62,9 +67,9 @@ public class MainActivity extends AppCompatActivity implements
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         // Make brand new ConfigureSurvey Fragment Activity by replacing ResultsFragment
-        ConfigureSurveyFragment mConfigureSurveyFragment = ConfigureSurveyFragment.newInstance();
-        ft.replace(R.id.results_fragment_container, mConfigureSurveyFragment);
-        ft.addToBackStack(TAG_CONFIG_FRAG);
+        IssueTimeFragment issueTimeFragment = IssueTimeFragment.newInstance();
+        ft.replace(R.id.survey_question_fragment_container, issueTimeFragment);
+        ft.addToBackStack(TAG_ISSUE_TIME_FRAG);
 
         ft.commit();
     }

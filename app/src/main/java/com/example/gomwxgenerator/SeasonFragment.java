@@ -15,18 +15,22 @@ import androidx.fragment.app.Fragment;
 import static android.content.ContentValues.TAG;
 
 /**
- * Where user chooses current season of GOMWX creation
+ * Where user chooses current season
  */
 public class SeasonFragment extends Fragment {
-    private int mAnswerOneCount = 0;
-    private int mAnswerTwoCount = 0;
-    private String mQuestion;
-    private String mAnswerOne;
-    private String mAnswerTwo;
+//    private int mAnswerOneCount = 0;
+//    private int mAnswerTwoCount = 0;
+    private String season;
+    private String summer;
+    private String fall;
+    private String winter;
+    private String spring;
 
-    private static final String ARG_NEW_QUESTION = "arg_question";
-    private static final String ARG_ANSWER_ONE = "arg_answer_one";
-    private static final String ARG_ANSWER_TWO = "arg_answer_two";
+    private static final String ARG_SEASON = "arg_season_question";
+    private static final String ARG_SUMMER = "arg_summer";
+    private static final String ARG_FALL = "arg_fall";
+    private static final String ARG_WINTER = "arg_winter";
+    private static final String ARG_SPRING = "arg_spring";
 
     interface ResultsListener {
         void surveyResults(int mAnswerOneCount, int mAnswerTwoCount);
@@ -40,16 +44,19 @@ public class SeasonFragment extends Fragment {
 
     private EditSurveyButtonListener mEditSurveyButtonListener;
 
-    public SurveyQuestionFragment() {
+    public SeasonFragment() {
         // Required empty public constructor
     }
 
-    public static SurveyQuestionFragment newInstance(String question, String answerOne, String answerTwo) {
-        SurveyQuestionFragment fragment = new SurveyQuestionFragment();
+    public static SeasonFragment newInstance(String question, String summer,
+                                             String fall, String winter, String spring) {
+        SeasonFragment fragment = new SeasonFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_NEW_QUESTION, question);
-        args.putString(ARG_ANSWER_ONE, answerOne);
-        args.putString(ARG_ANSWER_TWO, answerTwo);
+        args.putString(ARG_SEASON, question);
+        args.putString(ARG_SUMMER, summer);
+        args.putString(ARG_FALL, fall);
+        args.putString(ARG_FALL, winter);
+        args.putString(ARG_FALL, spring);
         fragment.setArguments(args);
         return fragment;
     }
@@ -58,9 +65,11 @@ public class SeasonFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mQuestion = getArguments().getString(ARG_NEW_QUESTION);
-            mAnswerOne = getArguments().getString(ARG_ANSWER_ONE);
-            mAnswerTwo = getArguments().getString(ARG_ANSWER_TWO);
+            season = getArguments().getString(ARG_SEASON);
+            summer = getArguments().getString(ARG_SUMMER);
+            fall = getArguments().getString(ARG_FALL);
+            winter = getArguments().getString(ARG_WINTER);
+            spring = getArguments().getString(ARG_SPRING);
         }
     }
 
@@ -90,37 +99,39 @@ public class SeasonFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_survey_question, container, false);
+        View view = inflater.inflate(R.layout.fragment_season, container, false);
 
-        final TextView mSurveyQuestion = view.findViewById(R.id.survey_question);
-        mSurveyQuestion.setText(mQuestion);
+        TextView seasonQuestion = view.findViewById(R.id.survey_question);
+        seasonQuestion.setText(season);
         // Get button IDs and TextView String resource ID
-        final Button mAnswerOneButton = view.findViewById(R.id.winter_button);
-        mAnswerOneButton.setText(mAnswerOne);
-        final Button mAnswerTwoButton = view.findViewById(R.id.spring_button);
-        mAnswerTwoButton.setText(mAnswerTwo);
+        Button summerButton = view.findViewById(R.id.summer_button);
+        summerButton.setText(summer);
+        Button fallButton = view.findViewById(R.id.fall_button);
+        fallButton.setText(fall);
+        Button winterButton = view.findViewById(R.id.winter_button);
+        winterButton.setText(winter);
+        Button springButton = view.findViewById(R.id.spring_button);
+        springButton.setText(spring);
 
-        Button mEditSurveyButton = view.findViewById(R.id.edit_survey_button);
+//        mAnswerOneButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d("SURVEY", "First answer " + mAnswerOneCount);
+//                mAnswerOneCount++; // Adds one vote per click
+//                mResultsListener.surveyResults(mAnswerOneCount, mAnswerTwoCount);
+//            }
+//        });
+//
+//        mAnswerTwoButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d("SURVEY", "Second answer " + mAnswerTwoCount);
+//                mAnswerTwoCount++; // Adds one vote per click
+//                mResultsListener.surveyResults(mAnswerOneCount, mAnswerTwoCount);
+//            }
+//        });
 
-        mAnswerOneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("SURVEY", "First answer " + mAnswerOneCount);
-                mAnswerOneCount++; // Adds one vote per click
-                mResultsListener.surveyResults(mAnswerOneCount, mAnswerTwoCount);
-            }
-        });
-
-        mAnswerTwoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("SURVEY", "Second answer " + mAnswerTwoCount);
-                mAnswerTwoCount++; // Adds one vote per click
-                mResultsListener.surveyResults(mAnswerOneCount, mAnswerTwoCount);
-            }
-        });
-
-        mEditSurveyButton.setOnClickListener(new View.OnClickListener() {
+        summerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
