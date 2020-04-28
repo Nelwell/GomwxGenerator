@@ -36,7 +36,9 @@
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/fall_button"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/survey_question"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
         android:id="@+id/fall_button"
@@ -51,7 +53,8 @@
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/winter_button"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/summer_button" />
 
     <Button
         android:id="@+id/winter_button"
@@ -66,7 +69,8 @@
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/spring_button"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fall_button" />
 
     <Button
         android:id="@+id/spring_button"
@@ -81,7 +85,31 @@
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/winter_button" />
+
+    <!--    <ScrollView-->
+    <!--        android:layout_width="409dp"-->
+    <!--        android:layout_height="78dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/survey_question"-->
+    <!--        tools:layout_editor_absoluteX="1dp">-->
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="vertical" >-->
+
+    <!--            <ImageButton-->
+    <!--                android:id="@+id/imageButton"-->
+    <!--                android:layout_width="393dp"-->
+    <!--                android:layout_height="283dp"-->
+    <!--                android:adjustViewBounds="true"-->
+    <!--                android:padding="5dp"-->
+    <!--                android:scaleType="fitCenter"-->
+    <!--                android:src="@drawable/usfntsfc2020040109" />-->
+    <!--        </LinearLayout>-->
+    <!--    </ScrollView>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
