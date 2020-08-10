@@ -32,31 +32,31 @@ public class SeasonFragment extends Fragment {
     private static final String ARG_WINTER = "arg_winter";
     private static final String ARG_SPRING = "arg_spring";
 
-    interface ResultsListener {
-        void surveyResults(int mAnswerOneCount, int mAnswerTwoCount);
+    interface SeasonListener {
+        void seasonSelection(String season, String summer, String fall, String winter, String spring);
     }
 
-    private ResultsListener mResultsListener;
+    private SeasonListener seasonListener;
 
-    interface EditSurveyButtonListener {
-        void editSurveyButtonPressed();
+    interface SummerListener {
+        void summerSelected();
     }
 
-    private EditSurveyButtonListener mEditSurveyButtonListener;
+    private SummerListener summerListener;
 
     public SeasonFragment() {
         // Required empty public constructor
     }
 
-    public static SeasonFragment newInstance(String question, String summer,
-                                             String fall, String winter, String spring) {
+    public static SeasonFragment newInstance(String question, String spring, String summer,
+                                             String fall, String winter) {
         SeasonFragment fragment = new SeasonFragment();
         Bundle args = new Bundle();
         args.putString(ARG_SEASON, question);
+        args.putString(ARG_FALL, spring);
         args.putString(ARG_SUMMER, summer);
         args.putString(ARG_FALL, fall);
         args.putString(ARG_FALL, winter);
-        args.putString(ARG_FALL, spring);
         fragment.setArguments(args);
         return fragment;
     }
@@ -66,10 +66,10 @@ public class SeasonFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             season = getArguments().getString(ARG_SEASON);
+            spring = getArguments().getString(ARG_SPRING);
             summer = getArguments().getString(ARG_SUMMER);
             fall = getArguments().getString(ARG_FALL);
             winter = getArguments().getString(ARG_WINTER);
-            spring = getArguments().getString(ARG_SPRING);
         }
     }
 
@@ -80,18 +80,18 @@ public class SeasonFragment extends Fragment {
         Log.d(TAG, "onAttach");
 
         // Verifies it's a listener
-        if (context instanceof ResultsListener){  // Context is the hosting Activity.
-            mResultsListener = (ResultsListener) context;
+        if (context instanceof SeasonListener){  // Context is the hosting Activity.
+            seasonListener = (SeasonListener) context;
             Log.d(TAG, "Listener set");
         } else  {
-            throw new RuntimeException(context.toString() + " must implement ResultsListener");
+            throw new RuntimeException(context.toString() + " must implement SeasonListener");
         }
 
-        if (context instanceof EditSurveyButtonListener){  // Context is the hosting Activity.
-            mEditSurveyButtonListener = (EditSurveyButtonListener) context;
+        if (context instanceof SummerListener){  // Context is the hosting Activity.
+            summerListener = (SummerListener) context;
             Log.d(TAG, "Listener set");
         } else {
-            throw new RuntimeException(context.toString() + " must implement EditSurveyButtonListener");
+            throw new RuntimeException(context.toString() + " must implement SummerListener");
         }
     }
 
@@ -104,23 +104,22 @@ public class SeasonFragment extends Fragment {
         TextView seasonQuestion = view.findViewById(R.id.survey_question);
         seasonQuestion.setText(season);
         // Get button IDs and TextView String resource ID
+        Button springButton = view.findViewById(R.id.spring_button);
+        springButton.setText(spring);
         Button summerButton = view.findViewById(R.id.summer_button);
         summerButton.setText(summer);
         Button fallButton = view.findViewById(R.id.fall_button);
         fallButton.setText(fall);
         Button winterButton = view.findViewById(R.id.winter_button);
         winterButton.setText(winter);
-        Button springButton = view.findViewById(R.id.spring_button);
-        springButton.setText(spring);
 
-//        mAnswerOneButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d("SURVEY", "First answer " + mAnswerOneCount);
-//                mAnswerOneCount++; // Adds one vote per click
-//                mResultsListener.surveyResults(mAnswerOneCount, mAnswerTwoCount);
-//            }
-//        });
+        summerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Season", "Summer selected");
+                summerListener.summerSelected();
+            }
+        });
 //
 //        mAnswerTwoButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -130,15 +129,6 @@ public class SeasonFragment extends Fragment {
 //                mResultsListener.surveyResults(mAnswerOneCount, mAnswerTwoCount);
 //            }
 //        });
-
-        summerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                // Call listener's editSurveyButtonPressed method to notify it that a EditSurveyButton was pressed
-                mEditSurveyButtonListener.editSurveyButtonPressed();
-            }
-        });
 
         return view;
     }

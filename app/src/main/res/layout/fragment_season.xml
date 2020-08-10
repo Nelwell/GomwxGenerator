@@ -24,11 +24,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/spring_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="#FFFFFF"
+        android:padding="3dp"
+        android:text="@string/spring"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/summer_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/survey_question" />
+
+
+    <Button
         android:id="@+id/summer_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
         android:background="#FFFFFF"
         android:padding="3dp"
         android:text="@string/summer"
@@ -37,15 +52,13 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/fall_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/survey_question"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toBottomOf="@+id/spring_button" />
 
     <Button
         android:id="@+id/fall_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
         android:background="#FFFFFF"
         android:padding="3dp"
         android:text="@string/fall"
@@ -61,32 +74,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
         android:background="#FFFFFF"
         android:padding="3dp"
         android:text="@string/winter"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/spring_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fall_button" />
-
-    <Button
-        android:id="@+id/spring_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
-        android:background="#FFFFFF"
-        android:padding="3dp"
-        android:text="@string/spring"
-        android:textAllCaps="false"
-        android:textColor="#000000"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/winter_button" />
+        app:layout_constraintTop_toBottomOf="@+id/fall_button" />
 
     <!--    <ScrollView-->
     <!--        android:layout_width="409dp"-->
