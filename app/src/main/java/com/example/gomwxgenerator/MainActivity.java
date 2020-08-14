@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements
         seasonFragment = SeasonFragment.newInstance(season, spring, summer, fall, winter);
         ft.replace(R.id.season_question_fragment_container, seasonFragment);
 
-        Log.d("Main Activity", "Save Edits");
+        Log.d("Main Activity", "Season Selection");
 
         ft.commit();
     }
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements
 
 //        // Make brand new season Fragment Activity by replacing existing activity
 //        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//        summerFragment = SummerFragment.newInstance();
+//        summerFragment = com.example.gomwxgenerator.SummerFragment.newInstance();
 //        ft.replace(R.id.season_question_fragment_container, seasonFragment);
 //
 //        Log.d("Main Activity", "Save Edits");

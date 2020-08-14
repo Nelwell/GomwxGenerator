@@ -18,22 +18,21 @@ import static android.content.ContentValues.TAG;
  * Where user chooses current season
  */
 public class SeasonFragment extends Fragment {
-//    private int mAnswerOneCount = 0;
-//    private int mAnswerTwoCount = 0;
+
     private String season;
+    private String spring;
     private String summer;
     private String fall;
     private String winter;
-    private String spring;
 
     private static final String ARG_SEASON = "arg_season_question";
+    private static final String ARG_SPRING = "arg_spring";
     private static final String ARG_SUMMER = "arg_summer";
     private static final String ARG_FALL = "arg_fall";
     private static final String ARG_WINTER = "arg_winter";
-    private static final String ARG_SPRING = "arg_spring";
 
     interface SeasonListener {
-        void seasonSelection(String season, String summer, String fall, String winter, String spring);
+        void seasonSelection(String season, String spring, String summer, String fall, String winter);
     }
 
     private SeasonListener seasonListener;
@@ -50,13 +49,14 @@ public class SeasonFragment extends Fragment {
 
     public static SeasonFragment newInstance(String question, String spring, String summer,
                                              String fall, String winter) {
+
         SeasonFragment fragment = new SeasonFragment();
         Bundle args = new Bundle();
         args.putString(ARG_SEASON, question);
-        args.putString(ARG_FALL, spring);
+        args.putString(ARG_SPRING, spring);
         args.putString(ARG_SUMMER, summer);
         args.putString(ARG_FALL, fall);
-        args.putString(ARG_FALL, winter);
+        args.putString(ARG_WINTER, winter);
         fragment.setArguments(args);
         return fragment;
     }
